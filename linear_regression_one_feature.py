@@ -1,39 +1,25 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from mlxtend.data import boston_housing_data
 
-X = np.array(     # one feature feet
-    [
-    [1,10],
-    [1,16],
-    [1,21],
-    [1,30],
-    [1,35],
-    [1,40],
-    [1,48],
-    [1,50],
-        ]
-        )
+X, Y = boston_housing_data()
+X = X[:, 7]              # DIS distance to 5 Boston employment centres
+vec = np.ones(X.shape[0])
+print(vec.shape)
 
-Y = np.array([        # in thousands of US dollars
-    20,
-    14,
-    60,
-    72,
-    79,
-    87,
-    90,
-    88,
-    ])
+temp = X
 
-W = np.array([
-    0,
-    0,
-    ])
+X = np.array([ vec, temp ]).T
 
 print(X.shape)
-print(W.shape)
 print(Y.shape)
-print()
+
+W = np.array([
+    1,
+    2,
+    ])
+
+print(W.shape)
 
 plt.plot(X[:, 1], Y, 'bx')
 plt.plot(X[:, 1], np.dot(X, W))
@@ -59,4 +45,5 @@ for epoch in range(0, epochs):
 
 plt.plot(range(0, epochs), error)
 plt.show()
+
 

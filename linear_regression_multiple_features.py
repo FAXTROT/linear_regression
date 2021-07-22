@@ -1,57 +1,25 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from mlxtend.data import boston_housing_data
 
-X = np.array(     # one feature feet
-    [
-    [1,10, 10**2],   # second feature is square of first
-    [1,16, 16**2],
-    [1,21, 21**2],
-    [1,30, 30**2],
-    [1,35, 35**2],
-    [1,40, 40**2],
-    [1,48, 48**2],
-    [1,50, 50**2],
-    [1,55, 55**2],
-    [1,63, 63**2],
-    [1,80, 80**2],
-        ]
-        )
+X, Y = boston_housing_data()
+vec = np.ones( [X.shape[0], 1])
+print(vec.shape)
 
-Y = np.array([        # in thousands of US dollars
-    20,
-    14,
-    60,
-    72,
-    79,
-    87,
-    90,
-    112,
-    142,
-    186,
-    225,
-    ])
+temp = X
 
-W = np.array([
-    2,
-    -1,
-    0.01,
-    ])
+X = np.column_stack((temp, vec))
 
 print(X.shape)
-print(W.shape)
 print(Y.shape)
-print()
 
-plt.plot(X[:, 1], Y, 'bx')
-plt.plot(X[:, 1], np.dot(X, W))
-plt.xlabel("feet")
-plt.ylabel("price in 000 of US dollars")
-plt.title("Initial dataset")
-plt.show()
+W = np.random.rand(X.shape[1], 1)
 
-alpha = 0.000000006
+print(W.shape)
+
+alpha = 0.00000001
 error = []
-epochs = 10
+epochs = 50
 
 for epoch in range(0, epochs):
     
@@ -62,17 +30,15 @@ for epoch in range(0, epochs):
     
     W = W - alpha * np.dot( X.T, (h-Y) )
 
-    if epoch % 1 == 0:
+    """
+    if epoch % 10 == 0:
         plt.plot(X[:, 1], Y, 'bx')
-        plt.plot(X[:, 1], np.dot(X, W))
-        plt.xlabel("feet")
-        plt.ylabel("price in 000 of US dollars")
-        plt.title(f"epoch number : {epoch}")
+        plt.plot(X[:, 2], np.dot(X, W))      # can not plot multidimensional thing
         plt.show()
+    """
+
 
 plt.plot(range(0, epochs), error)
-plt.xlabel("epochs")
-plt.ylabel("error")
-plt.title("J number")
 plt.show()
+
 
