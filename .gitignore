@@ -1,0 +1,5 @@
+# ignore files in here
+
+# ignore virtual env dir
+venv/
+
