@@ -34,7 +34,7 @@ Y = np.array([        # in thousands of US dollars
 W = np.array([
     2,
     -1,
-    0.01,
+    0,
     ])
 
 print(X.shape)
@@ -49,7 +49,10 @@ plt.ylabel("price in 000 of US dollars")
 plt.title("Initial dataset")
 plt.show()
 
-alpha = 0.000000006
+m, n = X.shape
+
+alpha = 0.000000005
+lmbda = 300000000
 error = []
 epochs = 10
 
@@ -60,7 +63,8 @@ for epoch in range(0, epochs):
     print(J)
     error.append(J)
     
-    W = W - alpha * np.dot( X.T, (h-Y) )
+    #W = W - alpha * np.dot( X.T, (h-Y) )
+    W = W * ( 1 - alpha*lmbda/m ) - alpha * np.dot( X.T, (h-Y) )
 
     if epoch % 1 == 0:
         plt.plot(X[:, 1], Y, 'bx')
