@@ -22,7 +22,7 @@ b) `$ python linear_regression_one_feature.py`
 
 ![Epoch 3](sample_output/epoch_3.png)
 
-...
+                                          ...
 
 ![Epoch 9](sample_output/epoch_9.png)
 
