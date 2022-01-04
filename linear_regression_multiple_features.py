@@ -1,8 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-X = np.array(     # one feature feet
-    [
+X = np.array([
     [1,10, 10**2],   # second feature is square of first
     [1,16, 16**2],
     [1,21, 21**2],
@@ -14,10 +13,9 @@ X = np.array(     # one feature feet
     [1,55, 55**2],
     [1,63, 63**2],
     [1,80, 80**2],
-        ]
-        )
+        ])
 
-Y = np.array([        # in thousands of US dollars
+Y = np.array([
     20,
     14,
     60,
@@ -43,10 +41,10 @@ print(Y.shape)
 print()
 
 plt.plot(X[:, 1], Y, 'bx')
-plt.plot(X[:, 1], np.dot(X, W))
 plt.xlabel("feet")
 plt.ylabel("price in 000 of US dollars")
 plt.title("Initial dataset")
+plt.savefig("sample_output/init_dataset.png")
 plt.show()
 
 m, n = X.shape
@@ -72,11 +70,13 @@ for epoch in range(0, epochs):
         plt.xlabel("feet")
         plt.ylabel("price in 000 of US dollars")
         plt.title(f"epoch number : {epoch}")
+        plt.savefig(f"sample_output/epoch_{epoch}.png")
         plt.show()
 
 plt.plot(range(0, epochs), error)
 plt.xlabel("epochs")
 plt.ylabel("error")
-plt.title("J number")
+plt.title("Error")
+plt.savefig(f"sample_output/error.png")
 plt.show()
 
